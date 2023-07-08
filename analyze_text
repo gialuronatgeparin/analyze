@@ -1,0 +1,30 @@
+from collections import Counter
+
+def analyze_text(file_path, num_words):
+    # Открываем файл и считываем его содержимое
+    with open(file_path, 'r') as file:
+        text = file.read()
+
+    # Разделяем текст на слова, удаляем знаки препинания и приводим к нижнему регистру
+    words = text.lower().split()
+    words = [word.strip(".,!?") for word in words]
+
+    # Подсчитываем частоту встречаемости слов
+    word_count = Counter(words)
+
+    # Получаем наиболее часто встречающиеся слова
+    top_words = word_count.most_common(num_words)
+
+    # Выводим результат
+    print(f"Наиболее часто встречающиеся слова ({num_words} шт.):")
+    for word, count in top_words:
+        print(f"{word}: {count} раз")
+
+# Путь к текстовому файлу
+file_path = 'example.txt'
+
+# Количество слов для анализа
+num_words = 5
+
+# Вызываем функцию анализа текста
+analyze_text(file_path, num_words)
